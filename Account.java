@@ -1,18 +1,30 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Account {
   static int lastID = 0;
+  static ArrayList<Account> accounts = new ArrayList<Account>();
   int id;
   int customerID;
   int balance;
-  LocalDate createdAt;
+  LocalDateTime createdAt;
 
   public Account(int cid, int balance) {
-    this.createdAt = Date.now();
+    this.createdAt = LocalDateTime.now();
     this.id = lastID;
     this.customerID = cid;
     this.balance = balance;
     Account.lastID++;
+    Account.accounts.add(this);
+  }
+
+  public static Account findByID(int id) {
+    for (Account account : Account.accounts) {
+      if (account.id == id) {
+        return account;
+      }
+    }
+    return null;
   }
 
   void increase(int by) {

@@ -1,16 +1,22 @@
-class SavingAccount extends Account {
-  int profitPercentage = 0;
-  LocalDate lastPercentageCalculationDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
-  SavingAccount(int cid, int balance) {
+class SavingAccount extends Account {
+  public int profitPercentage = 20;
+  public LocalDateTime lastPercentageCalculationDate;
+
+  public SavingAccount(int cid, int balance) {
     super(cid, balance);
+    this.lastPercentageCalculationDate = LocalDateTime.now();
   }
 
-  void calculateProfit() {
-    long m = ChronoUnit.MONTHS.between(
+  public int calculateProfit() {
+    int m = (int)ChronoUnit.SECONDS.between(
       this.lastPercentageCalculationDate,
-      Date.now()
+      LocalDateTime.now()
     );
-    this.balance += m * this.profitPercentage;
+    this.lastPercentageCalculationDate = LocalDateTime.now();
+    this.balance = this.balance + m * this.profitPercentage;
+    return this.balance;
   }
 }
