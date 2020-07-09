@@ -37,7 +37,7 @@ public class App {
     System.out.println("-> What type of account do U want?");
     System.out.println("  1. Transaction account");
     System.out.println("  2. Saving account");
-    System.out.println("  0. Exit");
+    System.out.println("  0. Go to menu");
 
 
     int n = App.scanner.nextInt();
